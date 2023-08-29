@@ -1,7 +1,7 @@
 import Foundation
 import Contacts
 
-public enum ContactKey: String {
+public enum ContactKey {
     /// The type of contact. E.g. person, organization
     case type
     /// The name prefix for this contact. E.g. Dr
@@ -62,38 +62,42 @@ public enum ContactKey: String {
     ///
     /// Requires additional [entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_contacts_notes).
     case note
+    /// The required keys necessary to perform vCard serialization via `CNContactVCardSerialization`
+    case vcard
 
-    public var rawValue: String {
+    public var keyDescriptor: CNKeyDescriptor {
         switch self {
-        case .type: return CNContactTypeKey
-        case .namePrefix: return CNContactNamePrefixKey
-        case .givenName: return CNContactGivenNameKey
-        case .middleName: return CNContactMiddleNameKey
-        case .familyName: return CNContactFamilyNameKey
-        case .previousFamilyName: return CNContactPreviousFamilyNameKey
-        case .nameSuffix: return CNContactNameSuffixKey
-        case .nickname: return CNContactNicknameKey
-        case .organizationName: return CNContactOrganizationNameKey
-        case .departmentName: return CNContactDepartmentNameKey
-        case .jobTitle: return CNContactJobTitleKey
-        case .phoneticGivenName: return CNContactPhoneticGivenNameKey
-        case .phoneticMiddleName: return CNContactPhoneticMiddleNameKey
-        case .phoneticFamilyName: return CNContactPhoneticFamilyNameKey
-        case .phoneticOrganizationName: return CNContactPhoneticOrganizationNameKey
-        case .birthday: return CNContactBirthdayKey
-        case .nonGregorianBirthday: return CNContactNonGregorianBirthdayKey
-        case .hasImage: return CNContactImageDataAvailableKey
-        case .imageData: return CNContactImageDataKey
-        case .thumbnailData: return CNContactThumbnailImageDataKey
-        case .phoneNumbers: return CNContactPhoneNumbersKey
-        case .emailAddresses: return CNContactEmailAddressesKey
-        case .postalAddresses: return CNContactPostalAddressesKey
-        case .dates: return CNContactDatesKey
-        case .urls: return CNContactUrlAddressesKey
-        case .relationships: return CNContactRelationsKey
-        case .socialProfiles: return CNContactSocialProfilesKey
-        case .instantMessageAddresses: return CNContactInstantMessageAddressesKey
-        case .note: return CNContactNoteKey
+        case .type: return CNContactTypeKey as CNKeyDescriptor
+        case .namePrefix: return CNContactNamePrefixKey as CNKeyDescriptor
+        case .givenName: return CNContactGivenNameKey as CNKeyDescriptor
+        case .middleName: return CNContactMiddleNameKey as CNKeyDescriptor
+        case .familyName: return CNContactFamilyNameKey as CNKeyDescriptor
+        case .previousFamilyName: return CNContactPreviousFamilyNameKey as CNKeyDescriptor
+        case .nameSuffix: return CNContactNameSuffixKey as CNKeyDescriptor
+        case .nickname: return CNContactNicknameKey as CNKeyDescriptor
+        case .organizationName: return CNContactOrganizationNameKey as CNKeyDescriptor
+        case .departmentName: return CNContactDepartmentNameKey as CNKeyDescriptor
+        case .jobTitle: return CNContactJobTitleKey as CNKeyDescriptor
+        case .phoneticGivenName: return CNContactPhoneticGivenNameKey as CNKeyDescriptor
+        case .phoneticMiddleName: return CNContactPhoneticMiddleNameKey as CNKeyDescriptor
+        case .phoneticFamilyName: return CNContactPhoneticFamilyNameKey as CNKeyDescriptor
+        case .phoneticOrganizationName: return CNContactPhoneticOrganizationNameKey as CNKeyDescriptor
+        case .birthday: return CNContactBirthdayKey as CNKeyDescriptor
+        case .nonGregorianBirthday: return CNContactNonGregorianBirthdayKey as CNKeyDescriptor
+        case .hasImage: return CNContactImageDataAvailableKey as CNKeyDescriptor
+        case .imageData: return CNContactImageDataKey as CNKeyDescriptor
+        case .thumbnailData: return CNContactThumbnailImageDataKey as CNKeyDescriptor
+        case .phoneNumbers: return CNContactPhoneNumbersKey as CNKeyDescriptor
+        case .emailAddresses: return CNContactEmailAddressesKey as CNKeyDescriptor
+        case .postalAddresses: return CNContactPostalAddressesKey as CNKeyDescriptor
+        case .dates: return CNContactDatesKey as CNKeyDescriptor
+        case .urls: return CNContactUrlAddressesKey as CNKeyDescriptor
+        case .relationships: return CNContactRelationsKey as CNKeyDescriptor
+        case .socialProfiles: return CNContactSocialProfilesKey as CNKeyDescriptor
+        case .instantMessageAddresses: return CNContactInstantMessageAddressesKey as CNKeyDescriptor
+        case .note: return CNContactNoteKey as CNKeyDescriptor
+        case .vcard: return CNContactVCardSerialization.descriptorForRequiredKeys()
+        
         }
     }
 }
@@ -111,7 +115,7 @@ public extension Array where Element == ContactKey {
             .hasImage, .imageData, .thumbnailData,
             .phoneNumbers, .emailAddresses, .postalAddresses,
             .dates, .urls,
-            .relationships, .socialProfiles, .instantMessageAddresses
+            .relationships, .socialProfiles, .instantMessageAddresses, .vcard
         ]
     }
 }

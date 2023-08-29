@@ -20,14 +20,13 @@ public extension FetchContact {
     ///   - idenfifier: The identifier of the contact
     ///   - keysToFetch: The keys to fetch for this contact
     init(
-        idenfifier: String,
+        identifier: String,
         keysToFetch: [ContactKey] = .allExcludingNote,
         animation: Animation? = .default
     ) {
-        let keys = keysToFetch.map { $0.rawValue as CNKeyDescriptor }
+        let keys = keysToFetch.map { $0.keyDescriptor }
         let request = CNContactFetchRequest(keysToFetch: keys)
-        request.predicate = CNContact.predicateForContacts(withIdentifiers: [idenfifier])
+        request.predicate = CNContact.predicateForContacts(withIdentifiers: [identifier])
         self.init(observer: ContactsObserver(request: request, animation: animation))
     }
-
 }

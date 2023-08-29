@@ -34,7 +34,7 @@ public extension FetchContactList {
          unified: Bool = true,
          animation: Animation? = .default
     ) {
-        let keys = keysToFetch.map { $0.rawValue as CNKeyDescriptor }
+        let keys = keysToFetch.map { $0.keyDescriptor }
         let request = CNContactFetchRequest(keysToFetch: keys)
         request.predicate = predicate
         request.sortOrder = sortOrder
